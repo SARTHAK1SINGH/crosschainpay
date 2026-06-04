@@ -69,6 +69,12 @@
             <artifactId>kotlin-reflect</artifactId>
         </dependency>
 
+        <!-- Jackson Kotlin Module for Spring Boot JSON deserialization -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
+
         <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

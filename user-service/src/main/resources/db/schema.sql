@@ -1,6 +1,6 @@
 -- Create database if not exists
-CREATE DATABASE IF NOT EXISTS crosschainpay_users;
-USE crosschainpay_users;
+CREATE DATABASE IF NOT EXISTS crosschainpay;
+USE crosschainpay;
 
 -- Create users table
 CREATE TABLE users (

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.slf4j.LoggerFactory
 
 data class ErrorResponse(
     val status: Int,
@@ -13,6 +14,9 @@ data class ErrorResponse(
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
+    companion object {
+        private val logger = LoggerFactory.getLogger(GlobalExceptionHandler::class.java)
+    }
 
     @ExceptionHandler(UserAlreadyExistsException::class)
     fun handleUserAlreadyExists(ex: UserAlreadyExistsException): ResponseEntity<ErrorResponse> {
@@ -40,8 +44,9 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception::class)
     fun handleGenericException(ex: Exception): ResponseEntity<ErrorResponse> {
+        logger.error("Unexpected error occurred", ex)
         return ResponseEntity(
-            ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred"),
+            ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.message ?: "An unexpected error occurred"),
             HttpStatus.INTERNAL_SERVER_ERROR
         )
     }
